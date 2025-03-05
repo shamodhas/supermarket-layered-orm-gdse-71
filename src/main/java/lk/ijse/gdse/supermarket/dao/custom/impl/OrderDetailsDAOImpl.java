@@ -2,6 +2,7 @@ package lk.ijse.gdse.supermarket.dao.custom.impl;
 
 import lk.ijse.gdse.supermarket.dao.custom.OrderDetailsDAO;
 import lk.ijse.gdse.supermarket.entity.Customer;
+import lk.ijse.gdse.supermarket.entity.OrderDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,14 @@ import java.util.Optional;
  **/
 
 public class OrderDetailsDAOImpl implements OrderDetailsDAO {
+
     @Override
-    public boolean save(Customer customer) {
+    public boolean save(OrderDetails orderDetails) {
         return false;
     }
 
     @Override
-    public boolean update(Customer customer) {
+    public boolean update(OrderDetails orderDetails) {
         return false;
     }
 
@@ -35,12 +37,12 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
     }
 
     @Override
-    public List<Customer> getAll() {
-        return null;
+    public List<OrderDetails> getAll() {
+        return List.of();
     }
 
     @Override
-    public Optional<Customer> findByPK(String pk) {
+    public Optional<OrderDetails> findByPK(String pk) {
         return Optional.empty();
     }
 
@@ -48,5 +50,4 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
     public Optional<String> getLastPK() {
         return Optional.empty();
     }
-
 }

@@ -8,15 +8,28 @@ import javafx.scene.control.ProgressIndicator; // Not used but can be useful for
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.gdse.supermarket.bo.SuperBO;
+import lk.ijse.gdse.supermarket.bo.custom.BoFactory;
+import lk.ijse.gdse.supermarket.bo.custom.BoTypes;
+import lk.ijse.gdse.supermarket.bo.custom.PlaceOrderBO;
+import lk.ijse.gdse.supermarket.bo.exeception.DuplicateException;
 import lk.ijse.gdse.supermarket.config.FactoryConfiguration;
 import lk.ijse.gdse.supermarket.dao.DaoFactory;
+import lk.ijse.gdse.supermarket.dao.DaoTypes;
+import lk.ijse.gdse.supermarket.dao.custom.CustomerDAO;
 import lk.ijse.gdse.supermarket.dao.custom.impl.CustomerDAOImpl;
+import lk.ijse.gdse.supermarket.dto.OrderDTO;
+import lk.ijse.gdse.supermarket.dto.OrderDetailsDTO;
 import lk.ijse.gdse.supermarket.entity.Customer;
 import lk.ijse.gdse.supermarket.entity.Item;
 import lk.ijse.gdse.supermarket.entity.SuperEntity;
 import org.hibernate.Session;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class AppInitializer extends Application {
@@ -43,6 +56,43 @@ public class AppInitializer extends Application {
 //
 //        Session session = FactoryConfiguration.getInstance().getSession();
 //        session.close();
+
+//        CustomerDAO customerDAO = DaoFactory.getInstance().getDAO(DaoTypes.CUSTOMER);
+//        System.out.println(customerDAO.getAll());
+
+        // PLace order
+
+//        PlaceOrderBO placeOrderBO = BoFactory.getInstance().getBO(BoTypes.PLACE_ORDER);
+//
+//        String orderId = "O001";
+//        OrderDTO orderDTO = new OrderDTO();
+//        orderDTO.setOrderId(orderId);
+//        orderDTO.setCustomerId("C001");
+//        orderDTO.setOrderDate(Date.valueOf(LocalDate.now()));
+//
+//        OrderDetailsDTO orderDetailsDTO1 = new OrderDetailsDTO();
+//        orderDetailsDTO1.setOrderId(orderId);
+//        orderDetailsDTO1.setItemId("I001");
+//        orderDetailsDTO1.setQuantity(50);
+//        orderDetailsDTO1.setPrice(20.00);
+//
+//        OrderDetailsDTO orderDetailsDTO2 = new OrderDetailsDTO();
+//        orderDetailsDTO2.setOrderId(orderId);
+//        orderDetailsDTO2.setItemId("I002");
+//        orderDetailsDTO2.setQuantity(5);
+//        orderDetailsDTO2.setPrice(100.00);
+//
+//        ArrayList<OrderDetailsDTO> orderDetailsDTOS = new ArrayList<>();
+//        orderDetailsDTOS.add(orderDetailsDTO1);
+//        orderDetailsDTOS.add(orderDetailsDTO2);
+//
+//        orderDTO.setOrderDetailsDTOS(orderDetailsDTOS);
+//
+//        boolean isSaved = placeOrderBO.placeOrder(orderDTO);
+//        System.out.println("Order placed : " + isSaved);
+
+//        throw new DuplicateException("hello");
+
         launch(); // Launch the JavaFX application
     }
 

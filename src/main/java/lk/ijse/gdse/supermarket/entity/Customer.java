@@ -34,7 +34,6 @@ public class Customer implements SuperEntity {
     private String email;
     private String phone;
 
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+//    private List<Order> orders;
 }

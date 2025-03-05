@@ -22,7 +22,7 @@ public interface CrudDAO<T extends SuperEntity, ID> extends SuperDAO {
 
     public boolean update(T t);
 
-    public boolean deleteByPK(ID pk);
+    public boolean deleteByPK(ID pk) throws Exception;
 
     public List<T> getAll();
 

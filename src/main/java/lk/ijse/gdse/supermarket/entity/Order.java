@@ -37,6 +37,6 @@ public class Order implements SuperEntity {
     @JoinColumn(name = "cus_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetails> orderDetails;
 }

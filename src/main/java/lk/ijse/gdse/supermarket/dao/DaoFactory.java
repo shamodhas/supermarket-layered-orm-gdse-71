@@ -26,7 +26,9 @@ public class DaoFactory {
         return daoFactory == null ? (daoFactory = new DaoFactory()) : daoFactory;
     }
 
+    //    SuperDAO
     @SuppressWarnings("unchecked")
+    // prevent compiler warning about unchecked type casting
     public <T extends SuperDAO> T getDAO(DaoTypes daoTypes) {
         return switch (daoTypes) {
             case CUSTOMER -> (T) new CustomerDAOImpl();

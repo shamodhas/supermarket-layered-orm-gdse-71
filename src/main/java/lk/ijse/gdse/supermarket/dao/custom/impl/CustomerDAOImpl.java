@@ -1,5 +1,7 @@
 package lk.ijse.gdse.supermarket.dao.custom.impl;
 
+import lk.ijse.gdse.supermarket.bo.exeception.DuplicateException;
+import lk.ijse.gdse.supermarket.bo.exeception.NotFoundException;
 import lk.ijse.gdse.supermarket.config.FactoryConfiguration;
 import lk.ijse.gdse.supermarket.dao.custom.CustomerDAO;
 import lk.ijse.gdse.supermarket.entity.Customer;
@@ -30,6 +32,13 @@ public class CustomerDAOImpl implements CustomerDAO {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
+            // C001
+            // C001
+            Customer existsCustomer = session.get(Customer.class, customer.getId());
+            if (existsCustomer != null) {
+               throw new DuplicateException("Customer id duplicated");
+            }
+
             session.persist(customer);
             transaction.commit();
             return true;
@@ -62,14 +71,17 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public boolean deleteByPK(String pk) {
+    public boolean deleteByPK(String pk) throws Exception{
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
             Customer customer = session.get(Customer.class, pk);
             if (customer == null) {
-                return false;
+                throw new NotFoundException("Customer not found");
             }
+            // customer have order
+            // In use
+
             session.remove(customer);
             transaction.commit();
             return true;
@@ -87,8 +99,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     public List<Customer> getAll() {
         Session session = factoryConfiguration.getSession();
         Query<Customer> query = session.createQuery("from Customer", Customer.class);
-        List<Customer> list = query.list();
-        return list;
+        return query.list();
     }
 
     @Override
@@ -106,7 +117,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     public Optional<String> getLastPK() {
         Session session = factoryConfiguration.getSession();
 
-        // select customer_id from customer order by customer_id desc limit 1
         String lastPk = session
                 .createQuery("SELECT c.id FROM Customer c ORDER BY c.id DESC", String.class)
                 .setMaxResults(1)

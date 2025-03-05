@@ -2,6 +2,8 @@ package lk.ijse.gdse.supermarket.dao.custom;
 
 import lk.ijse.gdse.supermarket.dao.CrudDAO;
 import lk.ijse.gdse.supermarket.entity.Customer;
+import lk.ijse.gdse.supermarket.entity.Item;
+import org.hibernate.Session;
 
 /**
  * --------------------------------------------
@@ -15,5 +17,6 @@ import lk.ijse.gdse.supermarket.entity.Customer;
  **/
 
 // Item
-public interface ItemDAO extends CrudDAO<Customer,String> {
+public interface ItemDAO extends CrudDAO<Item,String> {
+    public boolean updateItemWithOrder(Session session, Item item);
 }

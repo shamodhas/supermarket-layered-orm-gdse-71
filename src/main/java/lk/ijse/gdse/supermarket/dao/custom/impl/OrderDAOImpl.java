@@ -1,7 +1,10 @@
 package lk.ijse.gdse.supermarket.dao.custom.impl;
 
+import lk.ijse.gdse.supermarket.config.FactoryConfiguration;
 import lk.ijse.gdse.supermarket.dao.custom.OrderDAO;
 import lk.ijse.gdse.supermarket.entity.Customer;
+import lk.ijse.gdse.supermarket.entity.Order;
+import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +22,15 @@ import java.util.Optional;
  **/
 
 public class OrderDAOImpl implements OrderDAO {
+
     @Override
-    public boolean save(Customer customer) {
+    public boolean save(Order order) {
+        // new session
         return false;
     }
 
     @Override
-    public boolean update(Customer customer) {
+    public boolean update(Order order) {
         return false;
     }
 
@@ -35,13 +40,15 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public List<Customer> getAll() {
-        return null;
+    public List<Order> getAll() {
+        return List.of();
     }
 
     @Override
-    public Optional<Customer> findByPK(String pk) {
-        return Optional.empty();
+    public Optional<Order> findByPK(String pk) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Order order = session.get(Order.class, pk);
+        return Optional.ofNullable(order);
     }
 
     @Override
@@ -49,5 +56,14 @@ public class OrderDAOImpl implements OrderDAO {
         return Optional.empty();
     }
 
-
+    @Override
+    public boolean saveOrderWIthOrderDetails(Session session, Order order) {
+        try {
+            // data if exist update, no data save
+            session.merge(order);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

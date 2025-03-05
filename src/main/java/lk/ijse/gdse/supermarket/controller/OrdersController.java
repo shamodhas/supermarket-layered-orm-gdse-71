@@ -19,6 +19,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.gdse.supermarket.bo.SuperBO;
+import lk.ijse.gdse.supermarket.bo.custom.BoFactory;
+import lk.ijse.gdse.supermarket.bo.custom.BoTypes;
+import lk.ijse.gdse.supermarket.bo.custom.PlaceOrderBO;
 import lk.ijse.gdse.supermarket.dto.CustomerDTO;
 import lk.ijse.gdse.supermarket.dto.ItemDTO;
 import lk.ijse.gdse.supermarket.dto.OrderDTO;
@@ -85,7 +89,7 @@ public class OrdersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       setCellValues();
+        setCellValues();
 
         // Load data and initialize the page
         try {
@@ -190,8 +194,8 @@ public class OrdersController implements Initializable {
 
         boolean isValidQty = txtAddToCartQty.getText().matches(quantityPattern);
 
-        if (!isValidQty){
-            new Alert(Alert.AlertType.ERROR,"Invalid qty").show();
+        if (!isValidQty) {
+            new Alert(Alert.AlertType.ERROR, "Invalid qty").show();
             return;
         }
 
@@ -301,7 +305,9 @@ public class OrdersController implements Initializable {
                 orderDetailsDTOS
         );
 
-        boolean isSaved = orderModel.saveOrder(orderDTO);
+//        boolean isSaved = orderModel.saveOrder(orderDTO);
+        PlaceOrderBO placeOrderBO = BoFactory.getInstance().getBO(BoTypes.PLACE_ORDER);
+        boolean isSaved = placeOrderBO.placeOrder(orderDTO);
 
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Order saved..!").show();
